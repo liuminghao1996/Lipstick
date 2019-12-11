@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.is_across{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    font-weight: bold;
+    color: aliceblue;
+    background-color: aqua;
+}
+
+@media screen and (orientation: landscape) {
+    .is_across {
+        display: none;
+    }
+}

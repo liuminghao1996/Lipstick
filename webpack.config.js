@@ -3,26 +3,54 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['babel-polyfill', './src/main.js'],
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist')
+    },
+    resolve:{
+        alias:{
+            '@':path.resolve(__dirname, 'src')
+        }
     },
     devtool: "inline-source-map",
     devServer: {
         contentBase:path.resolve(__dirname, 'dist'),
         compress:true,//gzip压缩
-        port: 9000,
+        port: 9090,
         open:true
     },
+
     module:{
         rules: [
             {
                 test:/\.css$/,
+                exclude: /node_modules/,
                 use:['style-loader','css-loader']
             },
             {
-                test:/\.(png|jpg|jpeg|svg|gif)$/,
+                test: /\.(png|jpe?g|gif|svg)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'images/[name].[hash:8].[ext]'
+                    }
+                }
+            },
+            {
+                test:/\.(mp4|mp3)$/,
+                exclude: /node_modules/,
+                use:['file-loader']
+            },
+            {
+                test:/\.js$/,
+                exclude: /node_modules/,
+                use:['babel-loader']
+            },
+            {
+                test:/\.fnt$/,
+                exclude: /node_modules/,
                 use:['file-loader']
             }
         ]
@@ -32,6 +60,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             title:'口红机',
             inject:'body',
+            template: './index.html',
+            favicon: './status/favicon.ico',
             minify:true
         })
     ]
