@@ -4,7 +4,6 @@ export default class LoadingScene extends Phaser.Scene{
         super('loadScene');
     }
     preload(){
-
         const map = new Map();
         this.load.image('bg',require('@/images/bg.png'));
         this.load.image('gameOver',require('@/images/gameover.png'));
