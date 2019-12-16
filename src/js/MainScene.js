@@ -50,11 +50,15 @@ export default class MainScene extends Phaser.Scene{
         });
         // this.input.enableDebug(this._players);
         this.input.on('pointerdown',()=>{
+            if(!this.mark){
+                return '动画还未结束'
+            }
             this.tweens.add({
                 targets:this.player,
                 y:279,
                 duration:150,
                 onStart:()=>{
+                    this.mark = false
                 },
                 onComplete:()=>{
                     if(isMeet){
@@ -66,7 +70,7 @@ export default class MainScene extends Phaser.Scene{
                         this.player.setY(650);
                         let index = this._players.getLength()-1;
                         _clips[index] && _clips[index].setFrame(1);
-
+                        this.mark = true;
                         if(this._players.getLength()>=this._clips.getLength()){
                             console.log('成功，播放通关动画');
                             this.target.setVisible(false);
@@ -148,6 +152,7 @@ export default class MainScene extends Phaser.Scene{
         window.config.count = 30;
         this.speedConfig = {speed:1,maxSpeed:6,stop:0.02,handleRnd: () => Phaser.Math.FloatBetween(0.01, 0.05),guangqia: window.config.stop}
         this.stop = window.config.stop-1;
+        this.mark = true
     }
 
 }
