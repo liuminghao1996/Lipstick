@@ -2,8 +2,7 @@ import Phaser from 'phaser';
 import './css/index.css';
 import LoadingScene from './js/LoadingScene.js';
 import MainScene from './js/MainScene.js';
-import GameOver from './js/GameOver.js'
-
+import GameOver from './js/GameOver.js';
 const game = new Phaser.Game({
     type:Phaser.AUTO,
     width: 1280,

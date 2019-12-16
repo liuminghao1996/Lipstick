@@ -1,15 +1,16 @@
 import Phaser from 'phaser';
-import Map from './gameConfig.js';
-const map = new Map();
 export default class GameOver extends Phaser.Scene{
     constructor(){
         super('gameOver')
     }
     create(){
-        this.add.image(map.centerX,map.centerY,'bg');
-        this.add.image(map.centerX,map.centerY,'gameOver');
+        window.config.count = 30;
+        window.config.stop = 1;
+        window.config.boold = 3;
 
-        const btn = this.add.sprite(map.centerX,map.centerY+100,'btn',1).setInteractive();
+        this.add.image(window.config.centerX,window.config.centerY,'bg');
+        this.add.image(window.config.centerX,window.config.centerY,'gameOver');
+        const btn = this.add.sprite(window.config.centerX,window.config.centerY+100,'btn',1).setInteractive();
 
         btn.on('pointerdown',()=>{
             this.scene.start('mainScene')
