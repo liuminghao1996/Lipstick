@@ -13,9 +13,15 @@
     color: aliceblue;
     background-color: aqua;
 }
+#game_parent{
+    display: none;
+}
 
 @media screen and (orientation: landscape) {
     .is_across {
         display: none;
+    }
+    #game_parent{
+        display: block;
     }
 }

@@ -110,7 +110,6 @@ export default class MainScene extends Phaser.Scene{
                                     this.scene.start('gameOver');
                                 }else{
                                     this.scene.start('mainScene');
-
                                 }
                             }
                         })

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: ['babel-polyfill', './src/main.js'],
@@ -43,10 +44,16 @@ module.exports = {
                 exclude: /node_modules/,
                 use:['file-loader']
             },
+
             {
-                test:/\.js$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
-                use:['babel-loader']
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
             {
                 test:/\.fnt$/,
@@ -64,5 +71,9 @@ module.exports = {
             favicon: './status/favicon.ico',
             minify:true
         })
-    ]
+    ],
+    optimization: {
+        minimizer: [new UglifyJsPlugin()],
+        splitChunks: { chunks: 'all' }
+    }
 };
